@@ -6,12 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = await createPathName(__filename, "files");
 
 const list = async () => {
-  await fs
-    .readdir(__dirname)
-    .then((items) => console.log(items))
-    .catch(() => {
-      throw new Error("FS operation failed");
-    });
+  try {
+    const items = await fs.readdir(__dirname);
+    console.log(items);
+  } catch (err) {
+    throw new Error("FS operation failed");
+  }
 };
 
 await list();
